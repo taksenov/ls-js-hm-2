@@ -13,79 +13,73 @@
 //           Результат этой операции умножается на второй переданный аргумент (если он есть) и так далее.
 // Предусмотреть исключительные ситуации, для функции 'div', когда делитель равен нулю
 
-function calculator( firstNumber ) {
+function Calculator( firstNumber ) {
+    // Сумма
+    this.sum = function () {
+        var methodInputValue = firstNumber;
+        for (var i = 0; i < arguments.length; i++) {
+            methodInputValue = methodInputValue + arguments[i];
+        }
+        return methodInputValue;
+    },
+    //sum
 
-    var calcObj = {
-        // Сумма
-        sum: function () {
-            var methodInputValue = firstNumber;
-            for (var i = 0; i < arguments.length; i++) {
-                methodInputValue = methodInputValue + arguments[i];
-            }
-            return methodInputValue;
-        },
-        //sum
+    // Вычитание
+    this.dif = function () {
+        var methodInputValue = firstNumber;
+        for (var i = 0; i < arguments.length; i++) {
+            methodInputValue = methodInputValue - arguments[i];
+        }
+        return methodInputValue;
+    },
+    //dif
 
-        // Вычитание
-        dif: function () {
-            var methodInputValue = firstNumber;
-            for (var i = 0; i < arguments.length; i++) {
-                methodInputValue = methodInputValue - arguments[i];
-            }
-            return methodInputValue;
-        },
-        //dif
+    // Произведение
+    this.mul = function () {
+        var methodInputValue = firstNumber;
+        for (var i = 0; i < arguments.length; i++) {
+            methodInputValue = methodInputValue * arguments[i];
+        }
+        return methodInputValue;
+    },
+    //mul
 
-        // Произведение
-        mul: function () {
-            var methodInputValue = firstNumber;
-            for (var i = 0; i < arguments.length; i++) {
-                methodInputValue = methodInputValue * arguments[i];
-            }
-            return methodInputValue;
-        },
-        //mul
-
-        // Деление
-        div: function () {
-            var methodInputValue = firstNumber;
-            for (var i = 0; i < arguments.length; i++) {
-                try {
-                    if (  arguments[i] === 0 ) {
-                        throw new Error('DIVIDE_BY_ZERO');
-                    }
-                    methodInputValue = methodInputValue / arguments[i];
-                } catch (e) {
-                    if ( e.message === 'DIVIDE_BY_ZERO' ) {
-                        console.log('Попытка поделить на ноль.');
-                        return false;
-                    } else {
-                        console.log('Ошибка деления!');
-                        return false;
-                    }
+    // Деление
+    this.div = function () {
+        var methodInputValue = firstNumber;
+        for (var i = 0; i < arguments.length; i++) {
+            try {
+                if (  arguments[i] === 0 ) {
+                    throw new Error('DIVIDE_BY_ZERO');
+                }
+                methodInputValue = methodInputValue / arguments[i];
+            } catch (e) {
+                if ( e.message === 'DIVIDE_BY_ZERO' ) {
+                    console.log('Попытка поделить на ноль.');
+                    return false;
+                } else {
+                    console.log('Ошибка деления!');
+                    return false;
                 }
             }
-            return methodInputValue;
         }
-        //div
+        return methodInputValue;
+    }
+    //div
 
-    } // calcObj
+}
 
-    return calcObj;
-};
+var myCalculator2 = new Calculator(100);
 
-var myCalculator = calculator(100);
-
-
-console.log(myCalculator); //вернет Объект
+console.log(myCalculator2); //вернет Объект
 
 console.log('-----------');
 
-console.log(myCalculator.sum(1, 2, 3)); //вернет 106
-console.log(myCalculator.dif(10, 20)); //вернет 70
-console.log(myCalculator.div(2, 2)); //вернет 25
-console.log(myCalculator.mul(2, 2)); //вернет 400
+console.log(myCalculator2.sum(1, 2, 3)); //вернет 106
+console.log(myCalculator2.dif(10, 20)); //вернет 70
+console.log(myCalculator2.div(2, 2)); //вернет 25
+console.log(myCalculator2.mul(2, 2)); //вернет 400
 
 console.log('-----------');
 
-console.log(myCalculator.div(2, 2, 3, 0, 5)); //вернет Ошибку Деления на ноль!
+console.log(myCalculator2.div(2, 2, 3, 0, 5)); //вернет Ошибку Деления на ноль!

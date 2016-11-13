@@ -21,47 +21,34 @@ var noNumbers   = ['это', 'массив', 'без', 'чисел'];
 
 // Main func
 function isSomeTrue( source, filterFn ) {
-    var n = 0;
     var booleanReturn = false;
     var sourceLength = source.length;
 
     // check for emty source
     try {
-        if (  source.length === 0 ) {
+        if ( sourceLength === 0 || !Array.isArray(source) ) {
             throw new Error('SOURCE_EMPTY');
         }
     } catch (e) {
         if ( e.message === 'SOURCE_EMPTY') {
-            console.log( 'Введен пустой массив!' );
+            console.error( 'Введен пустой массив!' );
             booleanReturn = false;
             return booleanReturn;
         } else {
             console.log( 'Ошибка!' );
         }
-    } // check for emty source
+    }
+    // check for emty source
 
     // check source array for filterFn Rule
-    function checkSourceArrayElement(  ) {
-        try {
-            if ( n < source.length ) {
-                if ( filterFn(source[n]) ) {
-                    throw new Error('THIS_IS_TRUE');
-                }
-                ++n;
-                checkSourceArrayElement(  );
-            }
-
-        } catch (e) {
-            if ( e.message === 'THIS_IS_TRUE') {
-                booleanReturn = true;
-                return booleanReturn;
-            } else {
-                console.log( 'Ошибка!' );
-            }
+    for (var i = 0; i < sourceLength; i++) {
+        if ( filterFn(source[i]) ) {
+            booleanReturn = true;
+            return booleanReturn;
         }
-    } //checkSourceArrayElement
-    checkSourceArrayElement(  );
+    }
     // check source array for filterFn Rule
+
 
     // return from isAllTrue func
     return booleanReturn;
