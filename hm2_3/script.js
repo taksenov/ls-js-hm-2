@@ -21,7 +21,7 @@ function Calculator( firstNumber ) {
             methodInputValue = methodInputValue + arguments[i];
         }
         return methodInputValue;
-    },
+    };
     //sum
 
     // Вычитание
@@ -31,7 +31,7 @@ function Calculator( firstNumber ) {
             methodInputValue = methodInputValue - arguments[i];
         }
         return methodInputValue;
-    },
+    };
     //dif
 
     // Произведение
@@ -41,7 +41,7 @@ function Calculator( firstNumber ) {
             methodInputValue = methodInputValue * arguments[i];
         }
         return methodInputValue;
-    },
+    };
     //mul
 
     // Деление
@@ -64,7 +64,7 @@ function Calculator( firstNumber ) {
             }
         }
         return methodInputValue;
-    }
+    };
     //div
 
 }
