@@ -30,46 +30,32 @@ var noNumbers   = ['это', 'массив', 'без', 'чисел'];
 
 // Main func
 function isAllTrue( source, filterFn ) {
-    var n = 0;
     var booleanReturn = true;
     var sourceLength = source.length;
 
     // check for emty source
     try {
-        if (  source.length === 0 ) {
+        if ( sourceLength === 0 || !Array.isArray(source) ) {
             throw new Error('SOURCE_EMPTY');
         }
     } catch (e) {
         if ( e.message === 'SOURCE_EMPTY') {
-            console.log( 'Введен пустой массив!' );
+            console.error( 'Введен пустой массив!' );
             booleanReturn = false;
             return booleanReturn;
         } else {
             console.log( 'Ошибка!' );
         }
-    } // check for emty source
+    }
+    // check for emty source
 
     // check source array for filterFn Rule
-    function checkSourceArrayElement(  ) {
-        try {
-            if ( n < source.length ) {
-                if ( !filterFn(source[n]) ) {
-                    throw new Error('THIS_IS_FALSE');
-                }
-                ++n;
-                checkSourceArrayElement(  );
-            }
-
-        } catch (e) {
-            if ( e.message === 'THIS_IS_FALSE') {
-                booleanReturn = false;
-                return booleanReturn;
-            } else {
-                console.log( 'Ошибка!' );
-            }
+    for (var i = 0; i < sourceLength; i++) {
+        if ( !filterFn(source[i]) ) {
+            booleanReturn = false;
+            return booleanReturn;
         }
-    } //checkSourceArrayElement
-    checkSourceArrayElement(  );
+    }
     // check source array for filterFn Rule
 
     // return from isAllTrue func
@@ -83,18 +69,18 @@ function isNumber(val) {
 } // isNumber
 
 //
-console.log('allNumbers is TRUE ==='); //вернет true
+console.log('allNumbers is TRUE ===');
 console.log(isAllTrue(allNumbers, isNumber)); //вернет true
-console.log('------------------------------'); //вернет true
+console.log('------------------------------');
 
-console.log('emptyArray ERROR MSG ==='); //вернет true
-console.log(isAllTrue(emptyArray, isNumber)); //вернет true
-console.log('------------------------------'); //вернет true
+console.log('emptyArray ERROR MSG ===');
+console.log(isAllTrue(emptyArray, isNumber)); //вернет error и false
+console.log('------------------------------');
 
-console.log('someNumbers is FALSE ==='); //вернет false
+console.log('someNumbers is FALSE ===');
 console.log(isAllTrue(someNumbers, isNumber)); //вернет false
-console.log('------------------------------'); //вернет true
+console.log('------------------------------');
 
-console.log('noNumbers is FALSE ==='); //вернет false
+console.log('noNumbers is FALSE ===');
 console.log(isAllTrue(noNumbers, isNumber)); //вернет false
-console.log('------------------------------'); //вернет true
+console.log('------------------------------');
